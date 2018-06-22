@@ -16,6 +16,6 @@ export default postmessageplus;
 `
 console.log(content)
 
-fs.writeFileSync(pathUtil.resolve(srcPath, 'postmessage-plus.js'), content); 
-fs.writeFileSync(pathUtil.resolve(srcPath, 'postmessage-plus.cmd.js'), content_cmd); 
-fs.writeFileSync(pathUtil.resolve(srcPath, 'postmessage-plus.module.js'), content_module); 
+fs.writeFileSync(pathUtil.resolve(distPath, 'postmessage-plus.js'), content); 
+fs.writeFileSync(pathUtil.resolve(distPath, 'postmessage-plus.cmd.js'), content_cmd); 
+fs.writeFileSync(pathUtil.resolve(distPath, 'postmessage-plus.module.js'), content_module); 
