@@ -1,0 +1,1 @@
+A window.postMessage with callback!
