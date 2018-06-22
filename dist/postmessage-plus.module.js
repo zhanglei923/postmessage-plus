@@ -6,7 +6,7 @@
     var _waitingPromiseMap = {};
     var _currentResult;
     var handleMessage = function (data) {
-        //('got msg', window.location.href, data)
+        ////('got msg', window.location.href, data)
         var data = data.data;
         if(data.__postmessageplus_token){
             handleCall(data)
@@ -21,7 +21,7 @@
         var result =  data.__postmessageplus_result;
         _waitingPromiseMap[token].result = result;
         _waitingPromiseMap[token].success = true;
-        ////('aha!', window.location, data.__postmessageplus_result)
+        //////('aha!', window.location, data.__postmessageplus_result)
     }
     var handleCall = function(data){
         //invoke
@@ -31,9 +31,9 @@
 
         var result;
         var execStr = 'result = window.' + methodStr + '.apply(window, args)';
-        //(execStr, window.location)
+        ////(execStr, window.location)
         eval(execStr)
-        //('result', result)
+        ////('result', result)
         var iframelist0 = document.getElementsByTagName('iframe');
         var iframelist = [window.parent];
         for(var i = 0; i < iframelist0.length; i++){
@@ -99,7 +99,7 @@
         }
     }
     //listen
-    ////('listen!', window.addEventListener)
+    //////('listen!', window.addEventListener)
     if (window.addEventListener) {
         window.addEventListener("message", handleMessage);
     } else if (window.attachEvent) {
