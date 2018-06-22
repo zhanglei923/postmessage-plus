@@ -1,24 +1,47 @@
-
-
 //postmessage-plus
 (function(){
-    if (window.addEventListener) {                    //所有主流浏览器，除了 IE 8 及更早 IE版本
-        window.addEventListener("message", handleMessage);
-    } else if (window.attachEvent) {                  // IE 8 及更早 IE 版本
-        window.attachEvent("onmessage", handleMessage);
-    }
+    var _currentTarget = window.parent;
+    var _currentTargetHost = '*';
+    var _waitingPromiseMap = {};
     var handleMessage = function (data) {
-        if(data.__result_token){
+        console.log('got msg', data)
+        var data = data.data;
+        if(data.__postmessageplus_token){
+            handleCall(data)
+        }else if(data.__postmessageplus_result_token){
+            handleResultMsg(data)
+        }        
+    }
+    var handleResultMsg = function(data){
+        var token = data.__postmessageplus_result_token;
+        var waitinginfo = _waitingPromiseMap[token]
+        if(!waitinginfo) return;
+        console.log('aha!', window.location, data.__postmessageplus_result)
+    }
+    var handleCall = function(data){
+        //invoke
+        var methodStr = data.__postmessageplus_methodStr;
+        var args = data.__postmessageplus_args;
+        var token = data.__postmessageplus_token;
 
-        }else{
-
+        var result;
+        var execStr = 'result = window.' + methodStr + '.apply(window, args)';
+        console.log(execStr, window.location)
+        eval(execStr)
+        console.log('result', result)
+        var iframelist0 = document.getElementsByTagName('iframe');
+        var iframelist = [window.parent];
+        for(var i = 0; i < iframelist0.length; i++){
+            iframelist.push(iframelist0[i].contentWindow)
         }
-        
-    }
-    var handleResultMsg = function(){
-
-    }
-    var handleCall = function(){
+        //broadcast back to callee iframe(including this page itself):
+        for(var i = 0; i < iframelist.length; i++){
+            if(iframelist[i].postMessage)
+            iframelist[i].postMessage({
+                __postmessageplus_result_token: token,
+                __postmessageplus_result: result
+            }, _currentTargetHost);
+        }
 
     }
     //callback token, like: result-89876-1529647278723
@@ -27,7 +50,6 @@
         var random = Math.floor( Math.random() * Math.pow(10, 5));
         return 'result-'+random+'-'+time;
     }
-    var _currentTarget = window.parent;
     window.postmessageplus = {
         setTarget: function(target){
             _currentTarget = target;
@@ -35,17 +57,31 @@
         },
         call: function (){
             var args = [];
-            for(var i = 0; i < arguments.length; i++){
+            var methodStr = arguments[0];
+            for(var i = 1; i < arguments.length; i++){
                 args.push(arguments[i]);
             }
-            console.log('args', args)
-            parent.postMessage({}, '*');
-            _currentTarget = window.parent;//reverse back to parent by default!
             var token = generateToken();
-            console.log(token)
-            return new Promise(function (resolve, reject) {  
-                resolve(111)
+            _currentTarget.postMessage({
+                __postmessageplus_token: token,
+                __postmessageplus_methodStr: methodStr,
+                __postmessageplus_args: args
+            }, _currentTargetHost);
+            _currentTarget = window.parent;//reverse back to parent by default!
+            var promise = new Promise(function (resolve, reject) {  
+                resolve()
             });
+            _waitingPromiseMap[token] = {
+                promise: promise
+            };
+            return promise
         }
+    }
+    //listen
+    //console.log('listen!', window.addEventListener)
+    if (window.addEventListener) {
+        window.addEventListener("message", handleMessage);
+    } else if (window.attachEvent) {
+        window.attachEvent("onmessage", handleMessage);
     }
 })()
