@@ -20,6 +20,7 @@
         if(!waitinginfo) return;
         var result =  data.__postmessageplus_result;
         _waitingPromiseMap[token].result = result;
+        _waitingPromiseMap[token].success = true;
         //console.log('aha!', window.location, data.__postmessageplus_result)
     }
     var handleCall = function(data){
@@ -74,11 +75,18 @@
             }, _currentTargetHost);
             _currentTarget = window.parent;//reverse back to parent by default!
             var promise = new Promise(function(resolve, reject) {
-                window.setTimeout(function(){
-                    var result = _waitingPromiseMap[token].result;
-                    delete _waitingPromiseMap[token];
-                    resolve(result)
-                }, 10)
+                var d0 = new Date();
+                var o = window.setInterval(function(){
+                    if(_waitingPromiseMap[token].success){
+                        var result = _waitingPromiseMap[token].result;
+                        delete _waitingPromiseMap[token];
+                        window.clearInterval(o);
+                        resolve(result)
+                    }else if((new Date()) - d0 > 1000){//timeout
+                        window.clearInterval(o);
+                        reject()
+                    }
+                }, 5);
             });
             _waitingPromiseMap[token] = {
                 promise: promise
