@@ -10,13 +10,12 @@
             return  a+b+c;
         }
         var callChild = function(){
-            //var frame1 = document.getElementById('frame1')
+            var frame1 = document.getElementById('frame1')
             postmessageplus.setTarget(frame1).call('getChildValue', 1,2,3).then(function (result){
                 alert(result)
             })
         }
         var callSelf = function(){
-            //var frame1 = document.getElementById('frame1')
             postmessageplus.call('getValue', 1,2,3).then(function (result){
                 alert(result)
             })
