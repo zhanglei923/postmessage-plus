@@ -1,0 +1,17 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <script src="../dist/postmessage-plus.dist.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        var invoke = function(){
+            postmessageplus.call(parent, 'window.getValue', 1,2,3)
+        }
+    </script>
+    child page
+
+    <button onclick="invoke()">invoke</button>
+
+</body>
+</html>

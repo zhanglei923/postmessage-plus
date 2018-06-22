@@ -1,14 +1,18 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <script src="../dist/postmessage-plus.js" />
+    <script src="../dist/postmessage-plus.dist.js" ></script>
 </head>
 <body>
-<script type="text/javascript">
-
-</script>
-
-<button onclick="notice_error()">invoke</button>
+    main page
+    <script>
+        var getValue = function(a,b,c){
+            return  a+b+c;
+        }
+    
+    
+    </script>
+    <iframe src="./child.html" ></iframe>
 
 </body>
 </html>
