@@ -1,4 +1,5 @@
 //postmessage-plus
+var postmessageplus;
 (function(){
     var _currentTarget = window.parent;
     var _currentTargetHost = '*';
@@ -54,7 +55,7 @@
         var random = Math.floor( Math.random() * Math.pow(10, 5));
         return 'result-'+random+'-'+time;
     }
-    window.postmessageplus = {
+    postmessageplus = {
         setTarget: function(target){
             _currentTarget = target;
             if(_currentTarget.contentWindow) _currentTarget = _currentTarget.contentWindow;
@@ -105,3 +106,4 @@
         window.attachEvent("onmessage", handleMessage);
     }
 })()
+window.postmessageplus = postmessageplus;

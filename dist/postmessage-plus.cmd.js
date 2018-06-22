@@ -1,6 +1,7 @@
 
 define(function(require, exports, module) {
 //postmessage-plus
+var postmessageplus;
 (function(){
     var _currentTarget = window.parent;
     var _currentTargetHost = '*';
@@ -56,7 +57,7 @@ define(function(require, exports, module) {
         var random = Math.floor( Math.random() * Math.pow(10, 5));
         return 'result-'+random+'-'+time;
     }
-    window.postmessageplus = {
+    postmessageplus = {
         setTarget: function(target){
             _currentTarget = target;
             if(_currentTarget.contentWindow) _currentTarget = _currentTarget.contentWindow;
@@ -107,5 +108,6 @@ define(function(require, exports, module) {
         window.attachEvent("onmessage", handleMessage);
     }
 })()
+window.postmessageplus = postmessageplus;
 module.exports = postmessageplus;
 });
