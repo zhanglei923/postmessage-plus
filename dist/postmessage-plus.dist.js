@@ -107,6 +107,10 @@ this._howMany=0,this._unwrap=!1,this._initialized=!1}function o(t,e){if((0|e)!==
             var promise = new Promise(function(resolve, reject) {
                 var d0 = new Date();
                 var o = window.setInterval(function(){
+                    if(!_waitingPromiseMap[token]){
+                        window.clearInterval(o);
+                        return;
+                    }
                     if(_waitingPromiseMap[token].success){
                         var result = _waitingPromiseMap[token].result;
                         delete _waitingPromiseMap[token];

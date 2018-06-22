@@ -78,6 +78,10 @@ define(function(require, exports, module) {
             var promise = new Promise(function(resolve, reject) {
                 var d0 = new Date();
                 var o = window.setInterval(function(){
+                    if(!_waitingPromiseMap[token]){
+                        window.clearInterval(o);
+                        return;
+                    }
                     if(_waitingPromiseMap[token].success){
                         var result = _waitingPromiseMap[token].result;
                         delete _waitingPromiseMap[token];

@@ -1,0 +1,29 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+    <script src="../dist/postmessage-plus.dist.js"></script>
+</head>
+<body>
+    <script type="text/javascript">
+        getChildValue = function(){
+            return 'you got it'
+        }
+        var invoke = function(){
+            postmessageplus.call('getValue', 1,2,3).then(function (result){
+                console.log(new Date() - d0, result)
+            })
+        }
+        var d0;
+        var runInvoke = function(){
+            d0= new Date();
+            for(var i=0;i<Math.pow(10, 3);i++){
+                invoke()
+            }
+        }
+    </script>
+    child page
+
+    <button onclick="runInvoke()">call parent, performance test</button>
+
+</body>
+</html>
