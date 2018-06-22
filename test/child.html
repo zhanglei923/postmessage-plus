@@ -5,6 +5,9 @@
 </head>
 <body>
     <script type="text/javascript">
+        getChildValue = function(){
+            return 'you got it'
+        }
         var invoke = function(){
             postmessageplus.call('getValue', 1,2,3).then(function (result){
                 alert(result)
@@ -13,7 +16,7 @@
     </script>
     child page
 
-    <button onclick="invoke()">invoke</button>
+    <button onclick="invoke()">call parent</button>
 
 </body>
 </html>

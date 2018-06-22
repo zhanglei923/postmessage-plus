@@ -9,10 +9,23 @@
         var getValue = function(a,b,c){
             return  a+b+c;
         }
-    
+        var callChild = function(){
+            //var frame1 = document.getElementById('frame1')
+            postmessageplus.setTarget(frame1).call('getChildValue', 1,2,3).then(function (result){
+                alert(result)
+            })
+        }
+        var callSelf = function(){
+            //var frame1 = document.getElementById('frame1')
+            postmessageplus.call('getValue', 1,2,3).then(function (result){
+                alert(result)
+            })
+        }
     
     </script>
-    <iframe src="./child.html" ></iframe>
+    <iframe id="frame1" src="./child.html" ></iframe>
+    <button onclick="callSelf()">call self</button>
+    <button onclick="callChild()">call child</button>
 
 </body>
 </html>

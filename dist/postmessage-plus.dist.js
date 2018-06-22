@@ -87,6 +87,7 @@ this._howMany=0,this._unwrap=!1,this._initialized=!1}function o(t,e){if((0|e)!==
     window.postmessageplus = {
         setTarget: function(target){
             _currentTarget = target;
+            if(_currentTarget.contentWindow) _currentTarget = _currentTarget.contentWindow;
             return window.postmessageplus;
         },
         call: function (){

@@ -58,6 +58,7 @@ define(function(require, exports, module) {
     window.postmessageplus = {
         setTarget: function(target){
             _currentTarget = target;
+            if(_currentTarget.contentWindow) _currentTarget = _currentTarget.contentWindow;
             return window.postmessageplus;
         },
         call: function (){
