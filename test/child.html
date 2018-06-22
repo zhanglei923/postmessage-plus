@@ -6,7 +6,9 @@
 <body>
     <script type="text/javascript">
         var invoke = function(){
-            postmessageplus.call(parent, 'window.getValue', 1,2,3)
+            postmessageplus.call('window.getValue', 1,2,3).then(function (result){
+                alert(result)
+            })
         }
     </script>
     child page
