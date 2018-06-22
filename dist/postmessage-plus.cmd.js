@@ -7,7 +7,7 @@ define(function(require, exports, module) {
     var _waitingPromiseMap = {};
     var _currentResult;
     var handleMessage = function (data) {
-        console.log('got msg', window.location.href, data)
+        //('got msg', window.location.href, data)
         var data = data.data;
         if(data.__postmessageplus_token){
             handleCall(data)
@@ -22,7 +22,7 @@ define(function(require, exports, module) {
         var result =  data.__postmessageplus_result;
         _waitingPromiseMap[token].result = result;
         _waitingPromiseMap[token].success = true;
-        //console.log('aha!', window.location, data.__postmessageplus_result)
+        ////('aha!', window.location, data.__postmessageplus_result)
     }
     var handleCall = function(data){
         //invoke
@@ -32,9 +32,9 @@ define(function(require, exports, module) {
 
         var result;
         var execStr = 'result = window.' + methodStr + '.apply(window, args)';
-        console.log(execStr, window.location)
+        //(execStr, window.location)
         eval(execStr)
-        console.log('result', result)
+        //('result', result)
         var iframelist0 = document.getElementsByTagName('iframe');
         var iframelist = [window.parent];
         for(var i = 0; i < iframelist0.length; i++){
@@ -96,7 +96,7 @@ define(function(require, exports, module) {
         }
     }
     //listen
-    //console.log('listen!', window.addEventListener)
+    ////('listen!', window.addEventListener)
     if (window.addEventListener) {
         window.addEventListener("message", handleMessage);
     } else if (window.attachEvent) {
