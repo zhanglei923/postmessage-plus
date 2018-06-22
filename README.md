@@ -17,3 +17,5 @@ How to:
        alert(result)
    });
 ```
+
+Under the terms of the MIT Liscense.
