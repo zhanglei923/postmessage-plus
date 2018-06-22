@@ -5,8 +5,9 @@ define(function(require, exports, module) {
     var _currentTarget = window.parent;
     var _currentTargetHost = '*';
     var _waitingPromiseMap = {};
+    var _currentResult;
     var handleMessage = function (data) {
-        console.log('got msg', data)
+        console.log('got msg', window.location.href, data)
         var data = data.data;
         if(data.__postmessageplus_token){
             handleCall(data)
@@ -18,7 +19,9 @@ define(function(require, exports, module) {
         var token = data.__postmessageplus_result_token;
         var waitinginfo = _waitingPromiseMap[token]
         if(!waitinginfo) return;
-        console.log('aha!', window.location, data.__postmessageplus_result)
+        var result =  data.__postmessageplus_result;
+        _waitingPromiseMap[token].result = result;
+        //console.log('aha!', window.location, data.__postmessageplus_result)
     }
     var handleCall = function(data){
         //invoke
@@ -70,8 +73,12 @@ define(function(require, exports, module) {
                 __postmessageplus_args: args
             }, _currentTargetHost);
             _currentTarget = window.parent;//reverse back to parent by default!
-            var promise = new Promise(function (resolve, reject) {  
-                resolve()
+            var promise = new Promise(function(resolve, reject) {
+                window.setTimeout(function(){
+                    var result = _waitingPromiseMap[token].result;
+                    delete _waitingPromiseMap[token];
+                    resolve(result)
+                }, 10)
             });
             _waitingPromiseMap[token] = {
                 promise: promise
