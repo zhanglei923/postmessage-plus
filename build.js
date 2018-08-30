@@ -24,5 +24,9 @@ var clean = (content) =>{
 
 fs.writeFileSync(pathUtil.resolve(distPath, 'postmessage-plus.dist.js'), `${bluebird}\n${content}`); 
 fs.writeFileSync(pathUtil.resolve(distPath, 'postmessage-plus.cmd.js'), clean(content_cmd)); 
-fs.writeFileSync(pathUtil.resolve(npmPath, 'postmessage-plus.module.js'), clean(content_module)); 
+if(fs.existsSync(npmPath)){
+	fs.writeFileSync(pathUtil.resolve(npmPath, 'postmessage-plus.module.js'), clean(content_module));
+}else{
+	console.log('can not output to:', npmPath)
+}
 console.log('done.')

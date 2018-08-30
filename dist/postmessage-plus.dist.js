@@ -92,7 +92,7 @@ var postmessageplus;
             if(_currentTarget.contentWindow) _currentTarget = _currentTarget.contentWindow;
             return window.postmessageplus;
         },
-        call: function (){
+        callWindowMethod: function (){
             var args = [];
             var methodStr = arguments[0];
             for(var i = 1; i < arguments.length; i++){

@@ -11,12 +11,12 @@
         }
         var callChild = function(){
             var frame1 = document.getElementById('frame1')
-            postmessageplus.setTarget(frame1).call('getChildValue', 1,2,3).then(function (result){
+            postmessageplus.setTarget(frame1).callWindowMethod('getChildValue', 1,2,3).then(function (result){
                 alert(result)
             })
         }
         var callSelf = function(){
-            postmessageplus.call('getValue', 1,2,3).then(function (result){
+            postmessageplus.callWindowMethod('getValue', 1,2,3).then(function (result){
                 alert(result)
             })
         }
