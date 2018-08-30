@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <script src="../dist/postmessage-plus.dist.js"></script>
+    <script src="../../dist/v1/postmessage-plus.dist.js"></script>
 </head>
 <body>
     <script type="text/javascript">
@@ -9,7 +9,7 @@
             return 'you got it'
         }
         var invoke = function(){
-            postmessageplus.call('getValue', 1,2,3).then(function (result){
+            postmessageplus.callWindowMethod('getValue', 1,2,3).then(function (result){
                 console.log(new Date() - d0, result)
             })
         }

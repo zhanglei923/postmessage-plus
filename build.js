@@ -1,9 +1,10 @@
 let fs = require('fs');
 let pathUtil = require('path');
 
+let version = 'v1'
 let libPath = pathUtil.resolve(__dirname, './lib')
-let srcPath = pathUtil.resolve(__dirname, './src')
-let distPath = pathUtil.resolve(__dirname, './dist')
+let srcPath = pathUtil.resolve(__dirname, './src/'+version)
+let distPath = pathUtil.resolve(__dirname, './dist/'+version)
 let npmPath = pathUtil.resolve(__dirname, '../postmessage-plus-npm')
 
 let bluebird = fs.readFileSync(pathUtil.resolve(libPath, 'bluebird.min.js'),'utf8');
