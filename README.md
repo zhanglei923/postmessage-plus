@@ -1,17 +1,17 @@
 # A window.postMessage support callback!
 How to:
-- include postmessage-plus.js in both parent and iframe children pages like this: 
+- Download and put postmessage-plus.js in your parent and children(iframe) pages: 
 ```html
     <script src="../dist/postmessage-plus.dist.js"></script>
 ```
-- run script below to call a parent method:
+- Invoke parent page's method in iframe page:
 ```javascript
    postmessageplus.call('getValue', 1,2,3).then(function (result){
         alert(result)
    });
 ```
 
-- or call an child-iframe's method specifically:
+- Call a child iframe's method:
 ```javascript
    postmessageplus.setTarget(frame1).call('getChildValue', 1,2,3).then(function (result){
        alert(result)
