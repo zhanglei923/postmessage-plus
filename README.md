@@ -1,3 +1,5 @@
+# THIS LIB IS DEPRECATED, THE NEW REPLACEMENT LIB "messenger.js" IS ON THE WAY!
+
 # A window.postMessage support callback!
 How to:
 - Download and put postmessage-plus.js in your parent and children(iframe) pages: 
