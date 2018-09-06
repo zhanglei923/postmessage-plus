@@ -1,5 +1,5 @@
 # THIS LIB IS DEPRECATED. 
-# PLEASE TRY "messenger.js" (https://github.com/zhanglei923/messenger.js)!
+# PLEASE SWITCH TO "messenger.js" (https://github.com/zhanglei923/messenger.js)!
 
 # A window.postMessage support callback!
 How to:
