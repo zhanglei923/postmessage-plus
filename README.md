@@ -1,4 +1,5 @@
-# THIS LIB IS DEPRECATED, THE NEW REPLACEMENT LIB "messenger.js(https://github.com/zhanglei923/messenger.js)" IS ON THE WAY!
+# THIS LIB IS DEPRECATED. 
+# PLEASE TRY "messenger.js" (https://github.com/zhanglei923/messenger.js)!
 
 # A window.postMessage support callback!
 How to:
